@@ -1,8 +1,10 @@
 /* ===== গ্লোবাল স্টাইল ===== */
 :root {
-    --bg-color: #1a1a1a;
-    --sidebar-bg: #222222;
-    --card-bg: #2c2c2c;
+    --bg-color: #121212; /* গাঢ় ব্যাকগ্রাউন্ড */
+    /* স্বচ্ছ (Transparent) কালার, যাতে পার্টিকেল দেখা যায় */
+    --sidebar-bg: rgba(26, 26, 26, 0.85);
+    --card-bg: rgba(34, 34, 34, 0.8);
+    
     --primary-color: #00aaff;
     --text-color: #e0e0e0;
     --text-muted: #888888;
@@ -16,12 +18,28 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden; /* AOS এর জন্য জরুরি */
+}
+
+/* "সিম্পটম" ১: পার্টিকেল ব্যাকগ্রাউন্ড */
+#particles-js {
+    position: fixed; /* ব্যাকগ্রাউন্ডে ফিক্সড থাকবে */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* সবকিছুর পেছনে থাকবে */
+    background-color: var(--bg-color);
 }
 
 .container {
     display: grid;
     grid-template-columns: 350px 1fr;
     min-height: 100vh;
+    
+    /* নতুন: পার্টিকেলের উপরে কন্টেন্ট আনার জন্য */
+    position: relative;
+    z-index: 1;
 }
 
 h1, h2, h3, h4 {
@@ -36,15 +54,16 @@ i {
 
 /* ===== বাম প্যানেল (স্থির সাইডবার) ===== */
 .left-panel {
-    background-color: var(--sidebar-bg);
+    background-color: var(--sidebar-bg); /* স্বচ্ছ করা হয়েছে */
     padding: 40px;
     position: sticky;
     top: 0;
     height: 100vh;
-    box-sizing: border-box; /* Padding included in height */
+    box-sizing: border-box;
     overflow-y: auto;
     border-right: 1px solid var(--border-color);
     text-align: center;
+    backdrop-filter: blur(10px); /* গ্লাসের মতো ইফেক্ট */
 }
 
 .profile-pic {
@@ -67,28 +86,18 @@ i {
     font-weight: 300;
     color: var(--text-muted);
     margin-bottom: 30px;
-    height: 1.2em; /* টাইপিং এর জন্য স্পেস */
+    height: 1.2em; 
 }
 
-/* "সিম্পটম" ১: টাইপিং অ্যানিমেশন */
-.typing-effect {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid var(--primary-color);
-    animation: typing 3s steps(30, end) infinite,
-                 blink-caret .75s step-end infinite;
-    width: 100%; /* Initially full width to calculate steps */
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+/* "সিম্পটম" ২: Typed.js এর কার্সরের স্টাইল */
+.typed-cursor {
+    color: var(--primary-color);
+    animation: blink-caret .75s step-end infinite;
 }
 
 @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--primary-color) }
+    from, to { opacity: 1 }
+    50% { opacity: 0 }
 }
 
 .contact-info p {
@@ -97,14 +106,14 @@ i {
     margin: 10px 0;
 }
 
-/* "সিম্পটম" ২: অ্যানিমেটেড স্কিল বার */
+/* অ্যানিমেটেড স্কিল বার (আগের মতোই) */
 .skills-section {
     text-align: left;
     margin-top: 30px;
 }
 
 .skill-bar {
-    background-color: var(--card-bg);
+    background-color: rgba(60, 60, 60, 0.5);
     border-radius: 10px;
     margin-bottom: 10px;
     overflow: hidden;
@@ -121,21 +130,16 @@ i {
 }
 
 @keyframes load-bar {
-    from { width: 0 !important; } /* Use !important to override inline style */
-    to { /* Width is set by inline style */ }
+    from { width: 0 !important; }
+    to { /* Width set by inline style */ }
 }
 
 .languages {
     text-align: left;
     margin-top: 30px;
 }
-.languages ul {
-    list-style: none;
-    padding: 0;
-}
-.languages li {
-    margin-bottom: 5px;
-}
+.languages ul { list-style: none; padding: 0; }
+.languages li { margin-bottom: 5px; }
 
 /* ===== ডান প্যানেল (স্ক্রলযোগ্য কনটেন্ট) ===== */
 .right-panel {
@@ -155,7 +159,8 @@ section {
 }
 
 .card {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* স্বচ্ছ করা হয়েছে */
+    backdrop-filter: blur(10px); /* গ্লাসের মতো ইফেক্ট */
     border-radius: 8px;
     padding: 20px;
     border-left: 4px solid var(--primary-color);
@@ -163,6 +168,7 @@ section {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* "সিম্পটম" ৩: AOS এর জন্য কার্ড হোভার (ঐচ্ছিক) */
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
@@ -184,10 +190,10 @@ section {
     margin-bottom: 0;
 }
 
-/* "সিম্পটম" ৩: মডার্ন টাইমলাইন */
+/* মডার্ন টাইমলাইন (আগের মতোই) */
 .timeline {
     position: relative;
-    padding-left: 40px; /* ডট এবং লাইনের জন্য স্পেস */
+    padding-left: 40px;
     border-left: 3px solid var(--border-color);
 }
 
@@ -198,7 +204,7 @@ section {
 
 .timeline-dot {
     position: absolute;
-    left: -48px; /* (40px padding + 3px border)/2 - (dot width/2) */
+    left: -48px;
     top: 5px;
     width: 15px;
     height: 15px;
@@ -216,7 +222,7 @@ section {
 /* ট্রেনিং সেকশনের জন্য গ্রিড */
 .training-section .card-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2-column grid */
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
@@ -230,11 +236,11 @@ footer {
 /* ===== রেসপন্সিভ ডিজাইন (মোবাইলের জন্য) ===== */
 @media (max-width: 1000px) {
     .container {
-        grid-template-columns: 1fr; /* কলাম দুটিকে একটির নিচে আরেকটি আনা */
+        grid-template-columns: 1fr;
     }
     
     .left-panel {
-        position: relative; /* স্থির ভাব তুলে দেয়া */
+        position: relative;
         height: auto;
         border-right: none;
         border-bottom: 1px solid var(--border-color);
@@ -245,7 +251,7 @@ footer {
     }
 
     .training-section .card-grid {
-        grid-template-columns: 1fr; /* 1-column grid */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -257,10 +263,6 @@ footer {
         width: 150px;
         height: 150px;
     }
-    .name {
-        font-size: 1.8em;
-    }
-    .right-panel h2 {
-        font-size: 1.8em;
-    }
+    .name { font-size: 1.8em; }
+    .right-panel h2 { font-size: 1.8em; }
 }
