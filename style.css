@@ -1,10 +1,8 @@
 /* ===== গ্লোবাল স্টাইল ===== */
 :root {
-    --bg-color: #121212; /* গাঢ় ব্যাকগ্রাউন্ড */
-    /* স্বচ্ছ (Transparent) কালার, যাতে পার্টিকেল দেখা যায় */
-    --sidebar-bg: rgba(26, 26, 26, 0.85);
-    --card-bg: rgba(34, 34, 34, 0.8);
-    
+    --bg-color: #121212;
+    /* কার্ডের ব্যাকগ্রাউন্ড এখন একটু বেশি গাঢ় এবং স্বচ্ছ */
+    --card-bg: rgba(26, 26, 26, 0.9);
     --primary-color: #00aaff;
     --text-color: #e0e0e0;
     --text-muted: #888888;
@@ -21,25 +19,15 @@ body {
     overflow-x: hidden; /* AOS এর জন্য জরুরি */
 }
 
-/* "সিম্পটম" ১: পার্টিকেল ব্যাকগ্রাউন্ড */
+/* পার্টিকেল ব্যাকগ্রাউন্ড (আগের মতোই) */
 #particles-js {
-    position: fixed; /* ব্যাকগ্রাউন্ডে ফিক্সড থাকবে */
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 0; /* সবকিছুর পেছনে থাকবে */
+    z-index: 0;
     background-color: var(--bg-color);
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    min-height: 100vh;
-    
-    /* নতুন: পার্টিকেলের উপরে কন্টেন্ট আনার জন্য */
-    position: relative;
-    z-index: 1;
 }
 
 h1, h2, h3, h4 {
@@ -52,73 +40,111 @@ i {
     color: var(--primary-color);
 }
 
-/* ===== বাম প্যানেল (স্থির সাইডবার) ===== */
-.left-panel {
-    background-color: var(--sidebar-bg); /* স্বচ্ছ করা হয়েছে */
-    padding: 40px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    box-sizing: border-box;
-    overflow-y: auto;
-    border-right: 1px solid var(--border-color);
+/* ===== নতুন: সিঙ্গেল কলাম লেআউট ===== */
+.main-content {
+    max-width: 900px; /* কন্টেন্টের জন্য স্ট্যান্ডার্ড চওড়া */
+    margin: 0 auto; /* মাঝখানে আনার জন্য */
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1; /* পার্টিকেলের উপরে থাকবে */
+}
+
+/* ===== নতুন: হিরো সেকশন ===== */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    backdrop-filter: blur(10px); /* গ্লাসের মতো ইফেক্ট */
+    min-height: 90vh; /* পেজ লোডে স্ক্রিন ভর্তি থাকবে */
+    margin-bottom: 50px;
 }
 
 .profile-pic {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 5px solid var(--primary-color);
     object-fit: cover;
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+    margin-bottom: 25px;
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.6);
 }
 
 .name {
-    font-size: 2em;
-    margin-bottom: 5px;
+    font-size: 2.8em;
+    margin-bottom: 10px;
 }
 
 .title {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: 300;
     color: var(--text-muted);
-    margin-bottom: 30px;
-    height: 1.2em; 
+    height: 1.5em; 
 }
 
-/* "সিম্পটম" ২: Typed.js এর কার্সরের স্টাইল */
+/* Typed.js কার্সর */
 .typed-cursor {
     color: var(--primary-color);
     animation: blink-caret .75s step-end infinite;
 }
-
 @keyframes blink-caret {
     from, to { opacity: 1 }
     50% { opacity: 0 }
 }
 
+
+/* ===== নতুন: কন্টেন্ট সেকশন (কার্ড স্টাইল) ===== */
+.content-section {
+    margin-bottom: 40px;
+}
+
+.content-section h2 {
+    font-size: 2em;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 170, 255, 0.2);
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+}
 .contact-info p {
-    font-size: 0.9em;
-    text-align: left;
-    margin: 10px 0;
+    margin: 10px;
 }
 
-/* অ্যানিমেটেড স্কিল বার (আগের মতোই) */
-.skills-section {
-    text-align: left;
-    margin-top: 30px;
+.languages {
+    text-align: center;
 }
+.languages ul { list-style: none; padding: 0; }
+.languages li { margin: 5px 0; font-size: 1.1em; }
 
+/* স্কিল বার (আগের মতোই) */
+.skills-section { text-align: left; }
 .skill-bar {
     background-color: rgba(60, 60, 60, 0.5);
     border-radius: 10px;
     margin-bottom: 10px;
     overflow: hidden;
 }
-
 .skill-level {
     background-color: var(--primary-color);
     color: #111;
@@ -128,83 +154,31 @@ i {
     white-space: nowrap;
     animation: load-bar 1.5s ease-out forwards;
 }
-
 @keyframes load-bar {
     from { width: 0 !important; }
     to { /* Width set by inline style */ }
 }
 
-.languages {
-    text-align: left;
-    margin-top: 30px;
-}
-.languages ul { list-style: none; padding: 0; }
-.languages li { margin-bottom: 5px; }
-
-/* ===== ডান প্যানেল (স্ক্রলযোগ্য কনটেন্ট) ===== */
-.right-panel {
-    padding: 40px;
-    overflow-y: auto;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-.right-panel h2 {
+/* টাইমলাইন (আগের মতোই) */
+.timeline-section h2 {
     font-size: 2em;
+    text-align: center;
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
-
-.card {
-    background-color: var(--card-bg); /* স্বচ্ছ করা হয়েছে */
-    backdrop-filter: blur(10px); /* গ্লাসের মতো ইফেক্ট */
-    border-radius: 8px;
-    padding: 20px;
-    border-left: 4px solid var(--primary-color);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* "সিম্পটম" ৩: AOS এর জন্য কার্ড হোভার (ঐচ্ছিক) */
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-}
-
-.card h4 {
-    margin-top: 0;
-    font-size: 1.3em;
-}
-
-.card .company {
-    font-weight: bold;
-    color: var(--text-muted);
-    margin-bottom: 15px;
-}
-
-.card ul {
-    padding-left: 20px;
-    margin-bottom: 0;
-}
-
-/* মডার্ন টাইমলাইন (আগের মতোই) */
 .timeline {
     position: relative;
-    padding-left: 40px;
+    padding-left: 20px;
     border-left: 3px solid var(--border-color);
 }
-
 .timeline-item {
     position: relative;
     margin-bottom: 30px;
 }
-
 .timeline-dot {
     position: absolute;
-    left: -48px;
+    left: -28px;
     top: 5px;
     width: 15px;
     height: 15px;
@@ -212,17 +186,34 @@ section {
     border-radius: 50%;
     border: 3px solid var(--bg-color);
 }
-
 .timeline-date {
     font-weight: bold;
     color: var(--primary-color);
     margin-bottom: 10px;
 }
+.timeline-content.card {
+    border-left: 4px solid var(--primary-color);
+}
+.timeline-content.card h4 { margin-top: 0; font-size: 1.3em; }
+.timeline-content.card .company {
+    font-weight: bold;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+.timeline-content.card ul { padding-left: 20px; margin-bottom: 0; }
 
-/* ট্রেনিং সেকশনের জন্য গ্রিড */
+
+/* ট্রেনিং সেকশন */
+.training-section h2 {
+    font-size: 2em;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+}
 .training-section .card-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* ২ কলাম গ্রিড */
     gap: 20px;
 }
 
@@ -234,35 +225,25 @@ footer {
 }
 
 /* ===== রেসপন্সিভ ডিজাইন (মোবাইলের জন্য) ===== */
-@media (max-width: 1000px) {
-    .container {
-        grid-template-columns: 1fr;
+@media (max-width: 768px) {
+    .main-content { padding: 20px 10px; }
+    .hero-section { min-height: 70vh; }
+    .name { font-size: 2em; }
+    .title { font-size: 1.2em; }
+    
+    .contact-info {
+        flex-direction: column; /* একটার নিচে একটা */
+        align-items: center;
     }
     
-    .left-panel {
-        position: relative;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-    
-    .right-panel {
-        padding: 30px;
-    }
-
     .training-section .card-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* ১ কলাম গ্রিড */
     }
-}
 
-@media (max-width: 600px) {
-    .left-panel, .right-panel {
-        padding: 20px;
+    .timeline {
+        padding-left: 15px;
     }
-    .profile-pic {
-        width: 150px;
-        height: 150px;
+    .timeline-dot {
+        left: -23px;
     }
-    .name { font-size: 1.8em; }
-    .right-panel h2 { font-size: 1.8em; }
 }
