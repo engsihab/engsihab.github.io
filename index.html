@@ -66,32 +66,22 @@
             padding: 3rem 2rem; /* Kept padding for overall spacing */
             border-radius: 1rem;
             max-width: 90%;
-
-            /* --- MODIFICATION START --- */
-            /* Removed glassmorphism background */
-            /* background-color: rgba(10, 10, 10, 0.7); */ /* Dark semi-transparent background */
-            /* border: 1px solid rgba(255, 255, 255, 0.1); */ /* Subtle border */
-            /* backdrop-filter: blur(10px); */ /* Frosted glass effect */
-            /* -webkit-backdrop-filter: blur(10px); */ /* Safari support */
-            /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); */ /* Subtle shadow */
-            /* --- MODIFICATION END --- */
         }
 
-        /* --- NEW STYLE BLOCK --- */
+        /* --- MODIFICATION: Removed glassmorphism styles --- */
         .hero-title-glass-box {
-            /* display: inline-block; */ /* Wrap content -- MODIFICATION: Removed this line */
-            padding: 3rem 4rem; /* Give it space */
-            margin-bottom: 2rem; /* Space between box and paragraph */
-            border-radius: 1rem;
+            /* padding: 3rem 4rem; */ /* Removed padding */
+            margin-bottom: 2rem; /* Space between title block and paragraph */
+            /* border-radius: 1rem; */ /* Removed border-radius */
 
-            /* Glassmorphism styles moved here */
-            background-color: rgba(10, 10, 10, 0.7); /* Dark semi-transparent background */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-            -webkit-backdrop-filter: blur(10px); /* Safari support */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Subtle shadow */
+            /* Glassmorphism styles removed */
+            /* background-color: rgba(10, 10, 10, 0.7); */
+            /* border: 1px solid rgba(255, 255, 255, 0.1); */
+            /* backdrop-filter: blur(10px); */
+            /* -webkit-backdrop-filter: blur(10px); */
+            /* box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); */
         }
-        /* --- END NEW STYLE BLOCK --- */
+        /* --- END MODIFICATION --- */
 
         .hero-line {
             opacity: 0;
@@ -208,20 +198,19 @@
         <!-- Hero Section --><section class="hero-section content-section" id="hero">
             <div class="hero-text-container">
                 
-                <!-- --- MODIFICATION START --- -->
                 <!-- This new div wraps H1/H2 and has 'hero-line' to be animated -->
                 <div class="hero-title-glass-box hero-line">
                     <!-- Flex container to put H1 and H2 on the same line -->
                     <!-- It will wrap on small screens (flex-wrap) and align items to the center -->
                     <div class="flex flex-wrap items-baseline justify-center gap-x-4 gap-y-2">
-                        <!-- H1 and H2 no longer need 'hero-line' class -->
-                        <!-- Removed 'hero-line' from h1 and margin bottom -->
-                        <h1 class="text-5xl md:text-7xl font-bold animated-gradient-text" style="font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: 0.1em;">SIHAB HOSSAIN</h1>
-                        <!-- Removed 'hero-line' from h2 and margin bottom -->
+                        
+                        <!-- --- MODIFICATION: Increased text size --- -->
+                        <h1 class="text-7xl md:text-9xl font-bold animated-gradient-text" style="font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: 0.1em;">SIHAB HOSSAIN</h1>
+                        <!-- --- END MODIFICATION --- -->
+                        
                         <h2 class="text-2xl md:text-3xl font-light text-blue-300 subtitle-glow" style="font-family: 'Orbitron', sans-serif;">COMPUTER ENGINEER</h2>
                     </div>
                 </div>
-                <!-- --- MODIFICATION END --- -->
                 
                 <!-- This <p> still has 'hero-line' -->
                 <p class="text-base md:text-lg text-gray-300 max-w-lg mb-8 hero-line">
@@ -726,6 +715,7 @@
     </script>
 </body>
 </html>
+
 
 
 
